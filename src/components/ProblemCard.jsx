@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
+import { saveReviewDate } from '../services/firebaseService';
 
 function getDifficultyColor(difficulty) {
 	switch (difficulty.toLowerCase()) {
@@ -17,6 +18,16 @@ function getDifficultyColor(difficulty) {
 export default function ProblemCard({ problem }) {
 	const [reviewDate, setReviewDate] = useState('');
 
+	const handleReviewDate = async (date) => {
+		setReviewDate(date);
+		try {
+			await saveReviewDate(problem.title, date);
+			console.log('SUCCESS: Saved');
+		} catch (error) {
+			console.error('ERROR: ', error);
+		}
+	};
+
 	const [showButtons, setShowButtons] = useState(false);
 	const handleStartProblem = () => {
 		window.open(problem.link, '_blank');
@@ -27,28 +38,28 @@ export default function ProblemCard({ problem }) {
 		buttonSection = (
 			<div className='flex gap-2 mt-4 pt-4 border-t border-gray-700'>
 				<button
-					onClick={() => setReviewDate('Now')}
+					onClick={() => handleReviewDate('Now')}
 					className='flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 py-2 rounded text-sm transition-colors'
 				>
 					Again
 					<span className='block text-xs opacity-70'>1d</span>
 				</button>
 				<button
-					onClick={() => setReviewDate('3 Days')}
+					onClick={() => handleReviewDate('3 Days')}
 					className='flex-1 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 py-2 rounded text-sm transition-colors'
 				>
 					Hard
 					<span className='block text-xs opacity-70'>3d</span>
 				</button>
 				<button
-					onClick={() => setReviewDate('5 Days')}
+					onClick={() => handleReviewDate('7 Days')}
 					className='flex-1 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 py-2 rounded text-sm transition-colors'
 				>
 					Good
 					<span className='block text-xs opacity-70'>7d</span>
 				</button>
 				<button
-					onClick={() => setReviewDate('10 Days')}
+					onClick={() => handleReviewDate('14 Days')}
 					className='flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-400 py-2 rounded text-sm transition-colors'
 				>
 					Easy
