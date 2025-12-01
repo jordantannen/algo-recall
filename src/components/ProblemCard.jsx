@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ExternalLink, Brain, Clock, Play } from 'lucide-react';
+import { ExternalLink, Play } from 'lucide-react';
 
-const getDifficultyColor = (difficulty) => {
+function getDifficultyColor(difficulty) {
 	switch (difficulty.toLowerCase()) {
 		case 'easy':
 			return 'text-green-500 bg-green-500/10 border-green-500/20';
@@ -12,35 +12,45 @@ const getDifficultyColor = (difficulty) => {
 		default:
 			return 'text-gray-500';
 	}
-};
+}
 
-export default function ProblemCard({ problem, userData }) {
+export default function ProblemCard({ problem }) {
+	const [reviewDate, setReviewDate] = useState('');
+
 	const [showButtons, setShowButtons] = useState(false);
-
 	const handleStartProblem = () => {
 		window.open(problem.link, '_blank');
 		setShowButtons(true);
 	};
-
-	const isDue = userData && userData.nextReview <= Date.now();
-
 	let buttonSection;
 	if (showButtons) {
 		buttonSection = (
 			<div className='flex gap-2 mt-4 pt-4 border-t border-gray-700'>
-				<button className='flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 py-2 rounded text-sm transition-colors'>
+				<button
+					onClick={() => setReviewDate('Now')}
+					className='flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 py-2 rounded text-sm transition-colors'
+				>
 					Again
 					<span className='block text-xs opacity-70'>1d</span>
 				</button>
-				<button className='flex-1 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 py-2 rounded text-sm transition-colors'>
+				<button
+					onClick={() => setReviewDate('3 Days')}
+					className='flex-1 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 py-2 rounded text-sm transition-colors'
+				>
 					Hard
 					<span className='block text-xs opacity-70'>3d</span>
 				</button>
-				<button className='flex-1 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 py-2 rounded text-sm transition-colors'>
+				<button
+					onClick={() => setReviewDate('5 Days')}
+					className='flex-1 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 py-2 rounded text-sm transition-colors'
+				>
 					Good
 					<span className='block text-xs opacity-70'>7d</span>
 				</button>
-				<button className='flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-400 py-2 rounded text-sm transition-colors'>
+				<button
+					onClick={() => setReviewDate('10 Days')}
+					className='flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-400 py-2 rounded text-sm transition-colors'
+				>
 					Easy
 					<span className='block text-xs opacity-70'>14d</span>
 				</button>
@@ -87,8 +97,15 @@ export default function ProblemCard({ problem, userData }) {
 					{problem.difficulty}
 				</span>
 			</div>
-
 			{buttonSection}
+
+			<span
+				className={`text-xs uppercase tracking-wider font-semibold ${
+					reviewDate === 'Now' ? 'text-red-400' : 'text-gray-400'
+				}`}
+			>
+				Review Date: {reviewDate}
+			</span>
 		</div>
 	);
 }
