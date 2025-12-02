@@ -54,10 +54,7 @@ export async function getReviewDate(problemId) {
  * @returns {number} - Days until review (negative if overdue)
  */
 export function calculateDaysUntilReview(savedOn, reviewInterval) {
-	let daysToAdd = 0;
-	if (reviewInterval !== 'Now') {
-		daysToAdd = parseInt(reviewInterval);
-	}
+	let daysToAdd = parseInt(reviewInterval);
 
 	// Convert timestamps to dates at midnight
 	const savedDate = new Date(savedOn);

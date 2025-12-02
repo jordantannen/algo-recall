@@ -73,6 +73,10 @@ export default function ProblemCard({ problem, user }) {
 			}
 		}
 		loadReviewData();
+
+		const interval = setInterval(loadReviewData, 60 * 60 * 1000);
+    	return () => clearInterval(interval);
+
 	}, [user, problem.id]);
 
 	const [showButtons, setShowButtons] = useState(false);
@@ -86,28 +90,28 @@ export default function ProblemCard({ problem, user }) {
 		buttonSection = (
 			<div className='flex gap-2 mt-4 pt-4 border-t border-gray-700'>
 				<button
-					onClick={() => handleReviewDate('Now')}
+					onClick={() => handleReviewDate(0)}
 					className='flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Again
 					<span className='block text-xs opacity-70'>1d</span>
 				</button>
 				<button
-					onClick={() => handleReviewDate('3 Days')}
+					onClick={() => handleReviewDate(3)}
 					className='flex-1 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Hard
 					<span className='block text-xs opacity-70'>3d</span>
 				</button>
 				<button
-					onClick={() => handleReviewDate('7 Days')}
+					onClick={() => handleReviewDate(7)}
 					className='flex-1 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Good
 					<span className='block text-xs opacity-70'>7d</span>
 				</button>
 				<button
-					onClick={() => handleReviewDate('14 Days')}
+					onClick={() => handleReviewDate(14)}
 					className='flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Easy

@@ -34,9 +34,9 @@ export default function NavBar({ user }) {
 					) : (
 						<button
 							onClick={handleGoogleLogin}
-							className='bg-white hover:bg-gray-100 text-gray-900 cursor-pointer font-medium py-2 px-4 rounded-lg flex items-center gap-2 transition-colors text-sm'
+							className='flex items-center gap-2 text-sm text-gray-300 hover:text-white cursor-pointer'
 						>
-							Sign in with Google
+							<LogIn size={18} /> Sign In
 						</button>
 					)}
 				</div>
