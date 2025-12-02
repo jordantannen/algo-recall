@@ -19,14 +19,15 @@ function getDifficultyColor(difficulty) {
 	}
 }
 
-export default function ProblemCard({ problem }) {
+export default function ProblemCard({ problem, user }) {
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
 	const handleReviewDate = async (date) => {
 		try {
+			setShowButtons(false);
 			await saveReviewDate(problem.id, date);
-			// Recalculate days after saving
 			const days = calculateDaysUntilReview(Date.now(), date);
 			setDaysUntilReview(days);
+
 			console.log('SUCCESS: Saved');
 		} catch (error) {
 			console.error('ERROR: ', error);
@@ -35,14 +36,20 @@ export default function ProblemCard({ problem }) {
 
 	useEffect(() => {
 		async function loadReviewData() {
+			if (!user) {
+				setDaysUntilReview(null);
+				return;
+			}
 			const data = await getReviewDate(problem.id);
 			if (data) {
 				const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
 				setDaysUntilReview(days);
+			} else {
+				setDaysUntilReview(null);
 			}
 		}
 		loadReviewData();
-	}, []);
+	}, [user, problem.id]);
 
 	const [showButtons, setShowButtons] = useState(false);
 	const handleStartProblem = () => {
