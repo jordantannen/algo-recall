@@ -1,19 +1,27 @@
-import { db } from '../config/firebase';
+import { db, auth } from '../config/firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 export async function saveReviewDate(problemId, reviewDate) {
+	const user = auth.currentUser;
+	if (!user) {
+		throw new Error('Must be logged in to save review dates');
+	}
+
 	const docData = {
 		problemId,
 		reviewDate,
-		savedOn: Date.now()
+		savedOn: Date.now(),
 	};
 
-	const reviewRef = doc(db, 'problems', problemId);
+	const reviewRef = doc(db, 'users', user.uid, 'problems', problemId);
 	await setDoc(reviewRef, docData);
 }
 
 export async function getReviewDate(problemId) {
-	const reviewRef = doc(db, 'problems', problemId);
+	const user = auth.currentUser;
+	if (!user) return null;
+
+	const reviewRef = doc(db, 'users', user.uid, 'problems', problemId);
 	const docSnap = await getDoc(reviewRef);
 
 	if (docSnap.exists()) {
