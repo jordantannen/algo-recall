@@ -11,6 +11,23 @@ export async function saveReviewDate(problemId, reviewDate) {
 		problemId,
 		reviewDate,
 		savedOn: Date.now(),
+		completed: false,
+	};
+
+	const reviewRef = doc(db, 'users', user.uid, 'problems', problemId);
+	await setDoc(reviewRef, docData);
+}
+
+export async function markProblemComplete(problemId) {
+	const user = auth.currentUser;
+	if (!user) {
+		throw new Error('Must be logged in to mark problems complete');
+	}
+
+	const docData = {
+		problemId,
+		completed: true,
+		completedOn: Date.now(),
 	};
 
 	const reviewRef = doc(db, 'users', user.uid, 'problems', problemId);

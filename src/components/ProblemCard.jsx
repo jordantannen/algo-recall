@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, Play } from 'lucide-react';
+import { ExternalLink, Play, Check } from 'lucide-react';
 import {
 	saveReviewDate,
 	getReviewDate,
 	calculateDaysUntilReview,
+	markProblemComplete,
 } from '../services/firebaseService';
 
 function getDifficultyColor(difficulty) {
@@ -21,9 +22,12 @@ function getDifficultyColor(difficulty) {
 
 export default function ProblemCard({ problem, user }) {
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
+	const [completed, setCompleted] = useState(false);
+
 	const handleReviewDate = async (date) => {
+		setShowButtons(false);
+		setCompleted(false);
 		try {
-			setShowButtons(false);
 			await saveReviewDate(problem.id, date);
 			const days = calculateDaysUntilReview(Date.now(), date);
 			setDaysUntilReview(days);
@@ -34,17 +38,37 @@ export default function ProblemCard({ problem, user }) {
 		}
 	};
 
+	const handleMarkComplete = async () => {
+		try {
+			await markProblemComplete(problem.id);
+			setCompleted(true);
+			setDaysUntilReview(null);
+			setShowButtons(false);
+			console.log('SUCCESS: Marked complete');
+		} catch (error) {
+			console.error('ERROR: ', error);
+		}
+	};
+
 	useEffect(() => {
 		async function loadReviewData() {
 			if (!user) {
 				setDaysUntilReview(null);
+				setCompleted(false);
 				return;
 			}
 			const data = await getReviewDate(problem.id);
 			if (data) {
-				const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
-				setDaysUntilReview(days);
+				if (data.completed) {
+					setCompleted(true);
+					setDaysUntilReview(null);
+				} else {
+					setCompleted(false);
+					const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
+					setDaysUntilReview(days);
+				}
 			} else {
+				setCompleted(false);
 				setDaysUntilReview(null);
 			}
 		}
@@ -93,13 +117,20 @@ export default function ProblemCard({ problem, user }) {
 		);
 	} else {
 		buttonSection = (
-			<div className='mt-4 pt-3 border-t border-gray-700 flex justify-end'>
+			<div className='mt-4 pt-3 border-t border-gray-700 flex justify-end gap-2'>
 				<button
 					onClick={handleStartProblem}
 					className='flex items-center gap-2 text-sm bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md font-medium transition-colors shadow-lg shadow-blue-900/20 cursor-pointer'
 				>
 					<Play size={14} fill='currentColor' />
 					Open Problem
+				</button>
+				<button
+					onClick={handleMarkComplete}
+					className='flex items-center gap-2 text-sm bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-md font-medium transition-colors shadow-lg shadow-blue-900/20 cursor-pointer'
+				>
+					<Check size={14} />
+					Mark Complete
 				</button>
 			</div>
 		);
@@ -132,16 +163,24 @@ export default function ProblemCard({ problem, user }) {
 					>
 						{problem.difficulty}
 					</span>
-					{daysUntilReview !== null && (
+					{completed ? (
 						<div className='mt-2'>
-							<span
-								className={`text-xs uppercase tracking-wider font-semibold ${
-									daysUntilReview <= 0 ? 'text-red-400' : 'text-gray-400'
-								}`}
-							>
-								Due: {daysUntilReview <= 0 ? 'Now' : `${daysUntilReview}d`}
+							<span className='text-xs uppercase tracking-wider font-semibold text-green-400'>
+								Completed ✓
 							</span>
 						</div>
+					) : (
+						daysUntilReview !== null && (
+							<div className='mt-2'>
+								<span
+									className={`text-xs uppercase tracking-wider font-semibold ${
+										daysUntilReview <= 0 ? 'text-red-400' : 'text-gray-400'
+									}`}
+								>
+									Due: {daysUntilReview <= 0 ? 'Now' : `${daysUntilReview}d`}
+								</span>
+							</div>
+						)
 					)}
 				</div>
 			</div>
