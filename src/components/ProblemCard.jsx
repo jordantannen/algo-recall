@@ -23,7 +23,7 @@ export default function ProblemCard({ problem }) {
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
 	const handleReviewDate = async (date) => {
 		try {
-			await saveReviewDate(problem.title, date);
+			await saveReviewDate(problem.id, date);
 			// Recalculate days after saving
 			const days = calculateDaysUntilReview(Date.now(), date);
 			setDaysUntilReview(days);
@@ -35,21 +35,21 @@ export default function ProblemCard({ problem }) {
 
 	useEffect(() => {
 		async function loadReviewData() {
-			const data = await getReviewDate(problem.title);
+			const data = await getReviewDate(problem.id);
 			if (data) {
 				const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
 				setDaysUntilReview(days);
 			}
 		}
 		loadReviewData();
-	}, [problem.title]);
+	}, []);
 
 	const [showButtons, setShowButtons] = useState(false);
 	const handleStartProblem = () => {
 		window.open(problem.link, '_blank');
 		setShowButtons(true);
 	};
-	
+
 	let buttonSection;
 	if (showButtons) {
 		buttonSection = (
