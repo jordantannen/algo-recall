@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
-import { saveReviewDate } from '../services/firebaseService';
+import {
+	saveReviewDate,
+	getReviewDate,
+	calculateDaysUntilReview,
+} from '../services/firebaseService';
 
 function getDifficultyColor(difficulty) {
 	switch (difficulty.toLowerCase()) {
@@ -17,11 +21,28 @@ function getDifficultyColor(difficulty) {
 
 export default function ProblemCard({ problem }) {
 	const [reviewDate, setReviewDate] = useState('');
+	const [daysUntilReview, setDaysUntilReview] = useState(null);
+
+	// Load review data when component mounts
+	useEffect(() => {
+		async function loadReviewData() {
+			const data = await getReviewDate(problem.title);
+			if (data) {
+				setReviewDate(data.reviewDate);
+				const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
+				setDaysUntilReview(days);
+			}
+		}
+		loadReviewData();
+	}, [problem.title]);
 
 	const handleReviewDate = async (date) => {
 		setReviewDate(date);
 		try {
 			await saveReviewDate(problem.title, date);
+			// Recalculate days after saving
+			const days = calculateDaysUntilReview(Date.now(), date);
+			setDaysUntilReview(days);
 			console.log('SUCCESS: Saved');
 		} catch (error) {
 			console.error('ERROR: ', error);
@@ -100,23 +121,28 @@ export default function ProblemCard({ problem }) {
 						</a>
 					</h3>
 				</div>
-				<span
-					className={`px-2 py-1 rounded text-xs font-medium border ${getDifficultyColor(
-						problem.difficulty
-					)}`}
-				>
-					{problem.difficulty}
-				</span>
+				<div className='text-right'>
+					<span
+						className={`px-2 py-1 rounded text-xs font-medium border ${getDifficultyColor(
+							problem.difficulty
+						)}`}
+					>
+						{problem.difficulty}
+					</span>
+					{daysUntilReview !== null && (
+						<div className='mt-2'>
+							<span
+								className={`text-xs uppercase tracking-wider font-semibold ${
+									daysUntilReview <= 0 ? 'text-red-400' : 'text-gray-400'
+								}`}
+							>
+								Due: {daysUntilReview <= 0 ? 'Now' : `${daysUntilReview}d`}
+							</span>
+						</div>
+					)}
+				</div>
 			</div>
 			{buttonSection}
-
-			<span
-				className={`text-xs uppercase tracking-wider font-semibold ${
-					reviewDate === 'Now' ? 'text-red-400' : 'text-gray-400'
-				}`}
-			>
-				Review Date: {reviewDate}
-			</span>
 		</div>
 	);
 }
