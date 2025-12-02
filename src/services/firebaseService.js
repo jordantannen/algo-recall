@@ -8,12 +8,12 @@ export async function saveReviewDate(problemId, reviewDate) {
 		savedOn: Date.now()
 	};
 
-	const reviewRef = doc(db, 'reviews', problemId);
+	const reviewRef = doc(db, 'problems', problemId);
 	await setDoc(reviewRef, docData);
 }
 
 export async function getReviewDate(problemId) {
-	const reviewRef = doc(db, 'reviews', problemId);
+	const reviewRef = doc(db, 'problems', problemId);
 	const docSnap = await getDoc(reviewRef);
 
 	if (docSnap.exists()) {
