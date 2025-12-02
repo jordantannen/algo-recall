@@ -20,24 +20,8 @@ function getDifficultyColor(difficulty) {
 }
 
 export default function ProblemCard({ problem }) {
-	const [reviewDate, setReviewDate] = useState('');
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
-
-	// Load review data when component mounts
-	useEffect(() => {
-		async function loadReviewData() {
-			const data = await getReviewDate(problem.title);
-			if (data) {
-				setReviewDate(data.reviewDate);
-				const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
-				setDaysUntilReview(days);
-			}
-		}
-		loadReviewData();
-	}, [problem.title]);
-
 	const handleReviewDate = async (date) => {
-		setReviewDate(date);
 		try {
 			await saveReviewDate(problem.title, date);
 			// Recalculate days after saving
@@ -49,11 +33,23 @@ export default function ProblemCard({ problem }) {
 		}
 	};
 
+	useEffect(() => {
+		async function loadReviewData() {
+			const data = await getReviewDate(problem.title);
+			if (data) {
+				const days = calculateDaysUntilReview(data.savedOn, data.reviewDate);
+				setDaysUntilReview(days);
+			}
+		}
+		loadReviewData();
+	}, [problem.title]);
+
 	const [showButtons, setShowButtons] = useState(false);
 	const handleStartProblem = () => {
 		window.open(problem.link, '_blank');
 		setShowButtons(true);
 	};
+	
 	let buttonSection;
 	if (showButtons) {
 		buttonSection = (
