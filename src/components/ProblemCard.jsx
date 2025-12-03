@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { ExternalLink, Play, Check } from 'lucide-react';
 import {
-	saveReviewDate,
+	saveProblem,
+	completeProblem,
 	getReviewDate,
-	calculateDaysUntilReview,
-	markProblemComplete,
-} from '../services/firebaseService';
+} from '../services/storageService';
+import { calculateReviewDate, calculateDaysUntilReview } from '../utils/dates';
 
 function getDifficultyColor(difficulty) {
 	switch (difficulty.toLowerCase()) {
@@ -21,19 +21,18 @@ function getDifficultyColor(difficulty) {
 }
 
 export default function ProblemCard({ problem, user }) {
-	// State
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
 	const [completed, setCompleted] = useState(false);
 	const [showButtons, setShowButtons] = useState(false);
 
-	// Handlers
-	const handleReviewDate = async (date) => {
+	const handleReviewDate = async (daysInterval) => {
 		setShowButtons(false);
 		setCompleted(false);
+
 		try {
-			await saveReviewDate(problem.id, date);
-			const days = calculateDaysUntilReview(Date.now(), date);
-			setDaysUntilReview(days);
+			const reviewDate = calculateReviewDate(daysInterval);
+			setDaysUntilReview(daysInterval);
+			await saveProblem(problem, reviewDate);
 		} catch (error) {
 			console.error('Failed to save review date:', error);
 		}
@@ -41,7 +40,7 @@ export default function ProblemCard({ problem, user }) {
 
 	const handleMarkComplete = async () => {
 		try {
-			await markProblemComplete(problem.id);
+			await completeProblem(problem.id);
 			setCompleted(true);
 			setDaysUntilReview(null);
 			setShowButtons(false);
@@ -51,11 +50,10 @@ export default function ProblemCard({ problem, user }) {
 	};
 
 	const handleStartProblem = () => {
-		window.open(problem.link, '_blank');
+		// window.open(problem.link, '_blank');
 		setShowButtons(true);
 	};
 
-	// Load review data from Firebase and recalculate every hour
 	useEffect(() => {
 		async function loadReviewData() {
 			if (!user) {
@@ -71,10 +69,7 @@ export default function ProblemCard({ problem, user }) {
 					setDaysUntilReview(null);
 				} else {
 					setCompleted(false);
-					const days = calculateDaysUntilReview(
-						data.savedOn,
-						data.reviewDate
-					);
+					const days = calculateDaysUntilReview(data.nextReviewDate);
 					setDaysUntilReview(days);
 				}
 			} else {
@@ -84,10 +79,6 @@ export default function ProblemCard({ problem, user }) {
 		}
 
 		loadReviewData();
-
-		// Recalculate every hour while component is mounted
-		const interval = setInterval(loadReviewData, 60 * 60 * 1000);
-		return () => clearInterval(interval);
 	}, [user, problem.id]);
 
 	return (
