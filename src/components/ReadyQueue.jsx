@@ -53,13 +53,17 @@ export default function ReadyQueue({ user }) {
     }).filter(Boolean); // Remove any null entries
 
     return (
-        <div className='p-4 rounded-xl mb-8 border-2 border-dotted border-gray-700'>
-            <h2 className='text-2xl font-semibold mb-4 text-blue-400'>
-                Problems Due Today ({dueProblems.length})
+        <div>
+            <h2 className='text-xl font-bold text-gray-900 dark:text-white mb-4'>
+                Problems Due Today 
+                <span className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-800 px-2 py-0.5 ml-2 rounded-md">{dueProblems.length}</span>
             </h2>
-            <div className='space-y-2'>
-                {problemCards}
+            <div className='p-4 rounded-xl mb-8 border-2 border-dotted border-gray-700'>
+                <div className='space-y-2'>
+                    {problemCards}
+                </div>
             </div>
         </div>
+        
     );
 }
