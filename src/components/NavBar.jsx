@@ -45,7 +45,7 @@ export default function NavBar({ user, currentView, setCurrentView }) {
 				<div className='flex items-center gap-3'>
 					{user ? (
 						<>
-							<span className='text-white text-sm'>{user.displayName}</span>
+							<span className='text-white text-sm'>Sign Out</span>
 							<button
 								onClick={logout}
 								className='p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-full transition-colors cursor-pointer'
