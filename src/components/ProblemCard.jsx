@@ -7,6 +7,8 @@ import {
 } from '../services/storageService';
 import { calculateReviewDate, calculateDaysUntilReview } from '../utils/dates';
 
+// TODO: Remove magic numbers
+
 function getDifficultyColor(difficulty) {
 	switch (difficulty.toLowerCase()) {
 		case 'easy':
@@ -25,19 +27,19 @@ export default function ProblemCard({ problem, user, onProblemAttempt }) {
 	const [completed, setCompleted] = useState(false);
 	const [showButtons, setShowButtons] = useState(false);
 
-	const handleReviewDate = async (daysInterval) => {
+	const handleReviewDate = async (daysInterval, hasNewDueDate) => {
 		setShowButtons(false);
 		setCompleted(false);
+
+		// Notify parent component (if callback provided)
+		if (onProblemAttempt && hasNewDueDate) {
+			onProblemAttempt();
+		}
 
 		try {
 			const reviewDate = calculateReviewDate(daysInterval);
 			setDaysUntilReview(daysInterval);
 			await saveProblem(problem, reviewDate);
-			
-			// Notify parent component (if callback provided)
-			if (onProblemAttempt) {
-				onProblemAttempt();
-			}
 		} catch (error) {
 			console.error('Failed to save review date:', error);
 		}
@@ -154,21 +156,21 @@ export default function ProblemCard({ problem, user, onProblemAttempt }) {
 						<span className='block text-xs opacity-70'>1d</span>
 					</button>
 					<button
-						onClick={() => handleReviewDate(3)}
+						onClick={() => handleReviewDate(3, true)}
 						className='flex-1 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 py-2 rounded text-sm transition-colors cursor-pointer'
 					>
 						Hard
 						<span className='block text-xs opacity-70'>3d</span>
 					</button>
 					<button
-						onClick={() => handleReviewDate(7)}
+						onClick={() => handleReviewDate(7, true)}
 						className='flex-1 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 py-2 rounded text-sm transition-colors cursor-pointer'
 					>
 						Good
 						<span className='block text-xs opacity-70'>7d</span>
 					</button>
 					<button
-						onClick={() => handleReviewDate(14)}
+						onClick={() => handleReviewDate(14, true)}
 						className='flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-400 py-2 rounded text-sm transition-colors cursor-pointer'
 					>
 						Easy

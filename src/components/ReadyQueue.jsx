@@ -24,16 +24,6 @@ export default function ReadyQueue({ user }) {
 		setDueProblems((prev) => prev.filter((p) => p.problemId !== problemId));
 	};
 
-	// If no due problems, show success message
-	if (dueProblems.length === 0) {
-		return (
-			<div className='p-4 rounded-xl mb-8 border-2 border-dotted flex flex-col items-center justify-center border-gray-700 min-h-40'>
-				<CircleCheckBig size={50} className='text-green-500/90 mb-2' />
-				<h1>All caught up - go touch grass!</h1>
-			</div>
-		);
-	}
-
 	// Map problem IDs to full problem data and render cards
 	const problemCards = dueProblems
 		.map((dueProblem) => {
@@ -65,7 +55,14 @@ export default function ReadyQueue({ user }) {
 				</span>
 			</h2>
 			<div className='p-4 rounded-xl mb-8 border-2 border-dotted border-gray-700'>
-				<div className='space-y-2'>{problemCards}</div>
+				{dueProblems.length === 0 ? (
+					<div className='flex flex-col items-center justify-center min-h-40'>
+						<CircleCheckBig size={50} className='text-green-500/90 mb-2' />
+						<h1>All caught up - go touch grass!</h1>
+					</div>
+				) : (
+					<div className='space-y-2'>{problemCards}</div>
+				)}
 			</div>
 		</div>
 	);
