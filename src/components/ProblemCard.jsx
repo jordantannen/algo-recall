@@ -3,7 +3,7 @@ import { ExternalLink, Play, Check } from 'lucide-react';
 import {
 	saveProblem,
 	completeProblem,
-	getReviewDate,
+	getProblem,
 } from '../services/storageService';
 import { calculateReviewDate, calculateDaysUntilReview } from '../utils/dates';
 
@@ -62,7 +62,7 @@ export default function ProblemCard({ problem, user }) {
 				return;
 			}
 
-			const data = await getReviewDate(problem.id);
+			const data = await getProblem(problem.id);
 			if (data) {
 				if (data.completed) {
 					setCompleted(true);

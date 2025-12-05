@@ -8,6 +8,8 @@ export const saveProblem = (problem, nextReviewDate) =>
 export const completeProblem = (problemId) => 
     storageService.completeProblem(problemId);
 
-export const getReviewDate = (problemId) => 
+export const getProblem = (problemId) => 
     storageService.getProblem(problemId);
 
+export const getDueProblems = () => 
+    storageService.getDueProblems();

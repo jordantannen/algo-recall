@@ -11,4 +11,8 @@ export class Storage {
     async getProblem(problemId) {
         throw new Error('Must implement getReviewDate');
     }
+
+    async getDueProblems() {
+        throw new Error('Must implement getAllUserProblems');
+    }
 }
