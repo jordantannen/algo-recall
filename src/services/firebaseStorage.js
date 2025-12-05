@@ -84,7 +84,7 @@ export class FirebaseStorage extends Storage {
 
 			const problemQuery = query(
 				collection(db, 'users', user.uid, 'problems'),
-				where('nextReviewDate', '>=', today.getTime())
+				where('nextReviewDate', '<=', today.getTime())
 			);
 
 			const problemSnapshot = await getDocs(problemQuery);
