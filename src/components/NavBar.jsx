@@ -44,21 +44,20 @@ export default function NavBar({ user, currentView, setCurrentView }) {
 
 				<div className='flex items-center gap-3'>
 					{user ? (
-						<>
-							<span className='text-white text-sm'>Sign Out</span>
-							<button
-								onClick={logout}
-								className='p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-full transition-colors cursor-pointer'
-							>
-								<LogOut size={18} />
-							</button>
-						</>
+						<button
+							onClick={logout}
+							className='flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors cursor-pointer'
+						>
+							<LogOut size={18} />
+							Sign Out
+						</button>
 					) : (
 						<button
 							onClick={handleGoogleLogin}
-							className='flex items-center gap-2 text-sm text-gray-300 hover:text-white cursor-pointer'
+							className='flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors cursor-pointer'
 						>
-							<LogIn size={18} /> Sign In
+							<LogIn size={18} /> 
+							Sign In
 						</button>
 					)}
 				</div>
