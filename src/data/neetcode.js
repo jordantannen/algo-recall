@@ -460,5 +460,7 @@ export const NEETCODE_150 = [
 	},
 ];
 
-export const ALL_PROBLEMS = NEETCODE_150.flatMap(category => category.problems.map(problem => problem));
+export const ALL_PROBLEMS = NEETCODE_150.flatMap(category => 
+	category.problems.map(problem => ({ ...problem, category: category.category }))
+);
 export const PROBLEM_MAP = new Map(ALL_PROBLEMS.map(p => [p.id, p])); 
