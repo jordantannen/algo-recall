@@ -20,7 +20,7 @@ export default function ReadyQueue({ user }) {
     }, [user])
 
     // Remove a problem from the queue
-    const handleProblemComplete = (problemId) => {
+    const updateDueProblemsList = (problemId) => {
         setDueProblems(prev => prev.filter(p => p.problemId !== problemId));
     };
 
@@ -47,7 +47,7 @@ export default function ReadyQueue({ user }) {
                 key={dueProblem.problemId}
                 problem={fullProblem}
                 user={user}
-                onComplete={() => handleProblemComplete(dueProblem.problemId)}
+                onProblemAttempt={() => updateDueProblemsList(dueProblem.problemId)}
             />
         );
     }).filter(Boolean); // Remove any null entries

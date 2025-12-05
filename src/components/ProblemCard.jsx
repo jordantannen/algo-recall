@@ -20,7 +20,7 @@ function getDifficultyColor(difficulty) {
 	}
 }
 
-export default function ProblemCard({ problem, user, onComplete }) {
+export default function ProblemCard({ problem, user, onProblemAttempt }) {
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
 	const [completed, setCompleted] = useState(false);
 	const [showButtons, setShowButtons] = useState(false);
@@ -33,6 +33,11 @@ export default function ProblemCard({ problem, user, onComplete }) {
 			const reviewDate = calculateReviewDate(daysInterval);
 			setDaysUntilReview(daysInterval);
 			await saveProblem(problem, reviewDate);
+			
+			// Notify parent component (if callback provided)
+			if (onProblemAttempt) {
+				onProblemAttempt();
+			}
 		} catch (error) {
 			console.error('Failed to save review date:', error);
 		}
@@ -46,8 +51,8 @@ export default function ProblemCard({ problem, user, onComplete }) {
 			setShowButtons(false);
 			
 			// Notify parent component (if callback provided)
-			if (onComplete) {
-				onComplete();
+			if (onProblemAttempt) {
+				onProblemAttempt();
 			}
 		} catch (error) {
 			console.error('Failed to mark complete:', error);
