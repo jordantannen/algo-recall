@@ -7,6 +7,7 @@ import { onAuthChange } from './services/authService';
 
 export default function App() {
 	const [user, setUser] = useState(null);
+	const [currentView, setCurrentView] = useState('dashboard');
 
 	useEffect(() => {
 		const unsubscribe = onAuthChange((currentUser) => {
@@ -18,12 +19,12 @@ export default function App() {
 
 	return (
 		<div>
-			<NavBar user={user} />
+			<NavBar user={user} currentView={currentView} setCurrentView={setCurrentView} />
 
 			<div className='min-h-screen bg-gray-900 text-white p-8'>
 				<div className='max-w-5xl mx-auto'>
-					<ReadyQueue user={user} />
-					{NEETCODE_150.map((category) => (
+					{currentView === 'dashboard' && <ReadyQueue user={user} />}
+					{currentView === 'problemList' && NEETCODE_150.map((category) => (
 						<CategorySection
 							key={category.category}
 							category={category}
