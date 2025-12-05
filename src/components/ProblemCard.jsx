@@ -20,7 +20,7 @@ function getDifficultyColor(difficulty) {
 	}
 }
 
-export default function ProblemCard({ problem, user }) {
+export default function ProblemCard({ problem, user, onComplete }) {
 	const [daysUntilReview, setDaysUntilReview] = useState(null);
 	const [completed, setCompleted] = useState(false);
 	const [showButtons, setShowButtons] = useState(false);
@@ -44,6 +44,11 @@ export default function ProblemCard({ problem, user }) {
 			setCompleted(true);
 			setDaysUntilReview(null);
 			setShowButtons(false);
+			
+			// Notify parent component (if callback provided)
+			if (onComplete) {
+				onComplete();
+			}
 		} catch (error) {
 			console.error('Failed to mark complete:', error);
 		}

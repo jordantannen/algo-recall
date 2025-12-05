@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NEETCODE_150 } from './data/neetcode';
 import CategorySection from './components/CategorySection';
 import NavBar from './components/Navbar';
+import ReadyQueue from './components/ReadyQueue';
 import { onAuthChange } from './services/authService';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
 
 			<div className='min-h-screen bg-gray-900 text-white p-8'>
 				<div className='max-w-5xl mx-auto'>
+					<ReadyQueue user={user} />
 					{NEETCODE_150.map((category) => (
 						<CategorySection
 							key={category.category}

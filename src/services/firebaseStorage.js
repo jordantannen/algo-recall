@@ -75,7 +75,7 @@ export class FirebaseStorage extends Storage {
 	async getDueProblems() {
 		const user = auth.currentUser;
 		if (!user) {
-			throw new Error('User is not logged in');
+			return [];
 		}
 
 		try {
@@ -84,7 +84,7 @@ export class FirebaseStorage extends Storage {
 
 			const problemQuery = query(
 				collection(db, 'users', user.uid, 'problems'),
-				where('nextReviewDate', '==', today.getTime())
+				where('nextReviewDate', '>=', today.getTime())
 			);
 
 			const problemSnapshot = await getDocs(problemQuery);
@@ -92,7 +92,7 @@ export class FirebaseStorage extends Storage {
 
 		} catch (error) {
 			console.error('Failed to get problems from Firebase:', error);
-			throw new Error('Failed to get problems from Firebase');
+			throw new Error('getDueProblems Failed to get problems from Firebase');
 		}
 	}
 }
