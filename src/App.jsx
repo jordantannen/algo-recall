@@ -6,33 +6,33 @@ import ReadyQueue from './components/ReadyQueue';
 import { onAuthChange } from './services/authService';
 
 export default function App() {
-	const [user, setUser] = useState(null);
-	const [currentView, setCurrentView] = useState('dashboard');
+    const [user, setUser] = useState(null);
+    const [currentView, setCurrentView] = useState('dashboard');
 
-	useEffect(() => {
-		const unsubscribe = onAuthChange((currentUser) => {
-			setUser(currentUser);
-		});
+    useEffect(() => {
+        const unsubscribe = onAuthChange((currentUser) => {
+            setUser(currentUser);
+        });
 
-		return () => unsubscribe();
-	}, []);
+        return () => unsubscribe();
+    }, []);
 
-	return (
-		<div>
-			<NavBar user={user} currentView={currentView} setCurrentView={setCurrentView} />
+    return (
+        <div>
+            <NavBar user={user} currentView={currentView} setCurrentView={setCurrentView} />
 
-			<div className='min-h-screen bg-gray-900 text-white p-8'>
-				<div className='max-w-5xl mx-auto'>
-					{currentView === 'dashboard' && <ReadyQueue user={user} />}
-					{currentView === 'problemList' && NEETCODE_150.map((category) => (
-						<CategorySection
-							key={category.category}
-							category={category}
-							user={user}
-						/>
-					))}
-				</div>
-			</div>
-		</div>
-	);
+            <div className='min-h-screen bg-gray-50 text-gray-900 p-8'>
+                <div className='max-w-5xl mx-auto'>
+                    {currentView === 'dashboard' && <ReadyQueue user={user} />}
+                    {currentView === 'problemList' && NEETCODE_150.map((category) => (
+                        <CategorySection
+                            key={category.category}
+                            category={category}
+                            user={user}
+                        />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
