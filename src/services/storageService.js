@@ -13,3 +13,6 @@ export const getProblem = (problemId) =>
 
 export const getDueProblems = () => 
     storageService.getDueProblems();
+
+export const saveNotes = (problemId, notes) => 
+    storageService.saveNotes(problemId, notes);

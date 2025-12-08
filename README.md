@@ -15,4 +15,3 @@ A spaced repetition app for tracking LeetCode problem reviews.
 - [ ] Add localStorage support for offline/non-authenticated usage
 - [ ] Implement SM-2 algorithm for adaptive spacing
 - [ ] Add streak tracking
-- [ ] Add ability to take notes on problems

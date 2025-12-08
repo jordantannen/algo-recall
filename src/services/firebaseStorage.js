@@ -19,12 +19,18 @@ export class FirebaseStorage extends Storage {
 
 		try {
 			const docRef = doc(db, 'users', user.uid, 'problems', problem.id);
+			
+			// Get existing data to preserve notes
+			const existingDoc = await getDoc(docRef);
+			const existingNotes = existingDoc.exists() ? existingDoc.data().notes : '';
+			
 			const docData = {
 				problemId: problem.id,
 				problemTitle: problem.title,
 				nextReviewDate,
 				lastAttempted: Date.now(),
 				completed: false,
+				notes: existingNotes,
 			};
 
 			await setDoc(docRef, docData);
@@ -42,11 +48,17 @@ export class FirebaseStorage extends Storage {
 
 		try {
 			const docRef = doc(db, 'users', user.uid, 'problems', problemId);
+			
+			// Get existing data to preserve notes
+			const existingDoc = await getDoc(docRef);
+			const existingNotes = existingDoc.exists() ? existingDoc.data().notes : '';
+			
 			const docData = {
 				problemId,
 				nextReviewDate: 'N/A',
 				lastAttempted: Date.now(),
 				completed: true,
+				notes: existingNotes,
 			};
 
 			await setDoc(docRef, docData);
@@ -93,6 +105,33 @@ export class FirebaseStorage extends Storage {
 		} catch (error) {
 			console.error('Failed to get problems from Firebase:', error);
 			throw new Error('getDueProblems Failed to get problems from Firebase');
+		}
+	}
+
+	async saveNotes(problemId, notes) {
+		const user = auth.currentUser;
+		if (!user) {
+			throw new Error('User is not logged in');
+		}
+
+		try {
+			const docRef = doc(db, 'users', user.uid, 'problems', problemId);
+			const docSnap = await getDoc(docRef);
+			
+			if (docSnap.exists()) {
+				// Update existing document
+				await setDoc(docRef, { notes }, { merge: true });
+			} else {
+				// Create new document with notes only
+				await setDoc(docRef, {
+					problemId,
+					notes,
+					lastAttempted: Date.now(),
+				});
+			}
+		} catch (error) {
+			console.error('Failed to save notes to Firebase:', error);
+			throw new Error('Failed to save notes to Firebase');
 		}
 	}
 }
