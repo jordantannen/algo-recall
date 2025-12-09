@@ -1,17 +1,20 @@
 # AlgoRecall
 
-A spaced repetition app for tracking LeetCode problem reviews. 
+A spaced repetition web app for practicing LeetCode problems.
 
-## Tech Stack
+## ✨ Features
+- **Spaced Repetition**: Automated scheduling for problem reviews in a daily review queue.
+- **Integrated Notes**: Attach notes directly to problem cards to remember *why* a solution works.
+- **Progress Tracking**: Visual indicators for completed and pending daily reviews.
 
+## 🛠️ Tech Stack
 - **Frontend**: React, Vite
-- **Styling**: Tailwind
-- **Backend**: Firebase (Firestore + Authentication)
+- **Styling**: Tailwind CSS
+- **Backend**: Firebase (Firestore, Auth)
 - **Icons**: Lucide React
 
-
-## TODO
-
-- [ ] Add localStorage support for offline/non-authenticated usage
-- [ ] Implement SM-2 algorithm for adaptive spacing
-- [ ] Add streak tracking
+## 🚀 Roadmap
+- **Offline Support**: `localStorage` integration for non-authenticated usage.
+- **Smart Scheduling (SM-2)**: Implement the SuperMemo-2 algorithm for adaptive spacing.
+- **Streak Tracking**: Because I miss 2016 when every app had a streak.
+- **Custom Problems**: Allow users to track any LeetCode problem by pasting its URL.
