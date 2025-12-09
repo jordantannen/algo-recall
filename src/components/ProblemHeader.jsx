@@ -44,15 +44,13 @@ export default function ProblemHeader({
 				>
 					{problem.difficulty}
 				</span>
-				{completed ? (
-					<div className='mt-2'>
+				<div className='mt-2 h-[20px]'>
+					{completed ? (
 						<span className='text-xs uppercase tracking-wider font-semibold text-green-600'>
 							Completed ✓
 						</span>
-					</div>
-				) : (
-					daysUntilReview !== null && (
-						<div className='mt-2'>
+					) : (
+						daysUntilReview !== null && (
 							<span
 								className={`text-xs uppercase tracking-wider font-semibold ${
 									daysUntilReview <= 0
@@ -65,9 +63,9 @@ export default function ProblemHeader({
 									? 'Now'
 									: `${daysUntilReview}d`}
 							</span>
-						</div>
-					)
-				)}
+						)
+					)}
+				</div>
 			</div>
 		</div>
 	);

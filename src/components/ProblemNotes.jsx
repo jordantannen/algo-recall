@@ -50,7 +50,7 @@ export default function ProblemNotes({ problemId, initialNotes = '', user }) {
 		<div>
 			<button
 				onClick={() => setIsNotesExpanded(!isNotesExpanded)}
-				className='flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors cursor-pointer'
+				className='flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors'
 			>
 				{isNotesExpanded ? (
 					<NotebookPen size={14} />
