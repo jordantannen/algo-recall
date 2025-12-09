@@ -33,6 +33,12 @@ export const NEETCODE_150 = [
 				link: 'https://leetcode.com/problems/top-k-frequent-elements/',
 			},
 			{
+				id: 'nc70',
+				title: 'Encode and Decode Strings',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/encode-and-decode-strings/description/'
+			},
+			{
 				id: 'nc_6',
 				title: 'Product of Array Except Self',
 				difficulty: 'Medium',
@@ -150,12 +156,6 @@ export const NEETCODE_150 = [
 				link: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/',
 			},
 			{
-				id: 'nc_23',
-				title: 'Generate Parentheses',
-				difficulty: 'Medium',
-				link: 'https://leetcode.com/problems/generate-parentheses/',
-			},
-			{
 				id: 'nc_24',
 				title: 'Daily Temperatures',
 				difficulty: 'Medium',
@@ -238,6 +238,12 @@ export const NEETCODE_150 = [
 				link: 'https://leetcode.com/problems/merge-two-sorted-lists/',
 			},
 			{
+				id: 'nc_40',
+				title: 'Linked List Cycle',
+				difficulty: 'Easy',
+				link: 'https://leetcode.com/problems/linked-list-cycle/',
+			},
+			{
 				id: 'nc_36',
 				title: 'Reorder List',
 				difficulty: 'Medium',
@@ -260,12 +266,6 @@ export const NEETCODE_150 = [
 				title: 'Add Two Numbers',
 				difficulty: 'Medium',
 				link: 'https://leetcode.com/problems/add-two-numbers/',
-			},
-			{
-				id: 'nc_40',
-				title: 'Linked List Cycle',
-				difficulty: 'Easy',
-				link: 'https://leetcode.com/problems/linked-list-cycle/',
 			},
 			{
 				id: 'nc_41',
@@ -389,29 +389,6 @@ export const NEETCODE_150 = [
 		],
 	},
 	{
-		category: 'Tries',
-		problems: [
-			{
-				id: 'nc_60',
-				title: 'Implement Trie (Prefix Tree)',
-				difficulty: 'Medium',
-				link: 'https://leetcode.com/problems/implement-trie-prefix-tree/',
-			},
-			{
-				id: 'nc_61',
-				title: 'Design Add and Search Words Data Structure',
-				difficulty: 'Medium',
-				link: 'https://leetcode.com/problems/design-add-and-search-words-data-structure/',
-			},
-			{
-				id: 'nc_62',
-				title: 'Word Search II',
-				difficulty: 'Hard',
-				link: 'https://leetcode.com/problems/word-search-ii/',
-			},
-		],
-	},
-	{
 		category: 'Heap / Priority Queue',
 		problems: [
 			{
@@ -458,9 +435,255 @@ export const NEETCODE_150 = [
 			},
 		],
 	},
-];
-
-export const ALL_PROBLEMS = NEETCODE_150.flatMap(category => 
+	{
+		category: 'Backtracking',
+		problems: [
+			{
+				id: 'nc_83',
+				title: 'Subsets',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/subsets/',
+			},
+			{
+				id: 'nc_84',
+				title: 'Combination Sum',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/combination-sum/',
+			},
+			{
+				id: 'nc_85',
+				title: 'Combination Sum II',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/combination-sum-ii/',
+			},
+			{
+				id: 'nc_86',
+				title: 'Permutations',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/permutations/',
+			},
+			{
+				id: 'nc_87',
+				title: 'Subsets II',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/subsets-ii/',
+			},
+			{
+				id: 'nc_88',
+				title: 'Generate Parentheses',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/generate-parentheses/',
+			},
+			{
+				id: 'nc_89',
+				title: 'Word Search',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/word-search/',
+			},
+			{
+				id: 'nc_90',
+				title: 'Palindrome Partitioning',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/palindrome-partitioning/',
+			},
+			{
+				id: 'nc_91',
+				title: 'Letter Combinations of a Phone Number',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/letter-combinations-of-a-phone-number/',
+			},
+			{
+				id: 'nc_92',
+				title: 'N Queens',
+				difficulty: 'Hard',
+				link: 'https://leetcode.com/problems/n-queens/',
+			},
+		],
+	},
+	{
+		category: 'Tries',
+		problems: [
+			{
+				id: 'nc_60',
+				title: 'Implement Trie (Prefix Tree)',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/implement-trie-prefix-tree/',
+			},
+			{
+				id: 'nc_61',
+				title: 'Design Add and Search Words Data Structure',
+				difficulty: 'Medium',
+				link: 'https://leetcode.com/problems/design-add-and-search-words-data-structure/',
+			},
+		{
+			id: 'nc_62',
+			title: 'Word Search II',
+			difficulty: 'Hard',
+			link: 'https://leetcode.com/problems/word-search-ii/',
+		},
+	],
+},
+{
+	category: 'Graphs',
+	problems: [
+		{
+			id: 'nc_70',
+			title: 'Number of Islands',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/number-of-islands/',
+		},
+		{
+			id: 'nc_71',
+			title: 'Max Area of Island',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/max-area-of-island/',
+		},
+		{
+			id: 'nc_72',
+			title: 'Clone Graph',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/clone-graph/',
+		},
+		{
+			id: 'nc_73',
+			title: 'Walls And Gates',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/walls-and-gates/',
+		},
+		{
+			id: 'nc_74',
+			title: 'Rotting Oranges',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/rotting-oranges/',
+		},
+		{
+			id: 'nc_75',
+			title: 'Pacific Atlantic Water Flow',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/pacific-atlantic-water-flow/',
+		},
+		{
+			id: 'nc_76',
+			title: 'Surrounded Regions',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/surrounded-regions/',
+		},
+		{
+			id: 'nc_77',
+			title: 'Course Schedule',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/course-schedule/',
+		},
+		{
+			id: 'nc_78',
+			title: 'Course Schedule II',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/course-schedule-ii/',
+		},
+		{
+			id: 'nc_79',
+			title: 'Graph Valid Tree',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/graph-valid-tree/',
+		},
+		{
+			id: 'nc_80',
+			title: 'Number of Connected Components In An Undirected Graph',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/',
+		},
+		{
+			id: 'nc_81',
+			title: 'Redundant Connection',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/redundant-connection/',
+		},
+		{
+			id: 'nc_82',
+			title: 'Word Ladder',
+			difficulty: 'Hard',
+			link: 'https://leetcode.com/problems/word-ladder/',
+		},
+	],
+},
+{
+	category: 'Dynamic Programming',
+	problems: [
+		{
+			id: 'nc_93',
+			title: 'Climbing Stairs',
+			difficulty: 'Easy',
+			link: 'https://leetcode.com/problems/climbing-stairs/',
+		},
+		{
+			id: 'nc_94',
+			title: 'Min Cost Climbing Stairs',
+			difficulty: 'Easy',
+			link: 'https://leetcode.com/problems/min-cost-climbing-stairs/',
+		},
+		{
+			id: 'nc_95',
+			title: 'House Robber',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/house-robber/',
+		},
+		{
+			id: 'nc_96',
+			title: 'House Robber II',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/house-robber-ii/',
+		},
+		{
+			id: 'nc_97',
+			title: 'Longest Palindromic Substring',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/longest-palindromic-substring/',
+		},
+		{
+			id: 'nc_98',
+			title: 'Palindromic Substrings',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/palindromic-substrings/',
+		},
+		{
+			id: 'nc_99',
+			title: 'Decode Ways',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/decode-ways/',
+		},
+		{
+			id: 'nc_100',
+			title: 'Coin Change',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/coin-change/',
+		},
+		{
+			id: 'nc_101',
+			title: 'Maximum Product Subarray',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/maximum-product-subarray/',
+		},
+		{
+			id: 'nc_102',
+			title: 'Word Break',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/word-break/',
+		},
+		{
+			id: 'nc_103',
+			title: 'Longest Increasing Subsequence',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/longest-increasing-subsequence/',
+		},
+		{
+			id: 'nc_104',
+			title: 'Partition Equal Subset Sum',
+			difficulty: 'Medium',
+			link: 'https://leetcode.com/problems/partition-equal-subset-sum/',
+		},
+	],
+},
+];export const ALL_PROBLEMS = NEETCODE_150.flatMap(category => 
 	category.problems.map(problem => ({ ...problem, category: category.category }))
 );
 export const PROBLEM_MAP = new Map(ALL_PROBLEMS.map(p => [p.id, p])); 
