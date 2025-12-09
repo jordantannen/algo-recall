@@ -16,5 +16,6 @@ A spaced repetition web app for practicing LeetCode problems.
 ## 🚀 Roadmap
 - **Offline Support**: `localStorage` integration for non-authenticated usage.
 - **Smart Scheduling (SM-2)**: Implement the SuperMemo-2 algorithm for adaptive spacing.
-- **Streak Tracking**: Because I miss 2016 when every app had a streak.
+- **Streak Tracking**: I miss 2016 when every app had a streak.
 - **Custom Problems**: Allow users to track any LeetCode problem by pasting its URL.
+- **Motivational Quotes**: You can only write BFS so many times before you start questioning your life decisions.
