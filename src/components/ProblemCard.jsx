@@ -55,10 +55,13 @@ export default function ProblemCard({ problem, user, onProblemAttempt }) {
 				if (data.completed) {
 					setCompleted(true);
 					setDaysUntilReview(null);
-				} else {
+				} else if (data.nextReviewDate && typeof data.nextReviewDate === 'number') {
 					setCompleted(false);
 					const days = calculateDaysUntilReview(data.nextReviewDate);
 					setDaysUntilReview(days);
+				} else {
+					setCompleted(false);
+					setDaysUntilReview(null);
 				}
 				// Load notes if they exist
 				if (data.notes) {
