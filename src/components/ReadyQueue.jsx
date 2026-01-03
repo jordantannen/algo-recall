@@ -8,12 +8,9 @@ export default function ReadyQueue({ user }) {
     const [dueProblems, setDueProblems] = useState([]);
 
     useEffect(() => {
-        if (!user) return;
-
         async function load() {
             const problems = await getDueProblems();
             setDueProblems(problems);
-            console.log(problems);
         }
 
         load();

@@ -23,12 +23,10 @@ export default function ProblemNotes({ problemId, initialNotes = '', user }) {
 
 		// Set new timeout to save after 1 second of no typing
 		const timeout = setTimeout(async () => {
-			if (user) {
-				try {
-					await saveNotes(problemId, newNotes);
-				} catch (error) {
-					console.error('Failed to save notes:', error);
-				}
+			try {
+				await saveNotes(problemId, newNotes);
+			} catch (error) {
+				console.error('Failed to save notes:', error);
 			}
 		}, 1000);
 
@@ -43,8 +41,6 @@ export default function ProblemNotes({ problemId, initialNotes = '', user }) {
 			}
 		};
 	}, []);
-
-	if (!user) return null;
 
 	return (
 		<div>

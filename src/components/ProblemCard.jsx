@@ -50,12 +50,6 @@ export default function ProblemCard({ problem, user, onProblemAttempt }) {
 
 	useEffect(() => {
 		async function loadReviewData() {
-			if (!user) {
-				setDaysUntilReview(null);
-				setCompleted(false);
-				return;
-			}
-
 			const data = await getProblem(problem.id);
 			if (data) {
 				if (data.completed) {
