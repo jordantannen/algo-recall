@@ -22,7 +22,7 @@ export class FirebaseStorage extends Storage {
 			
 			// Get existing data to preserve notes
 			const existingDoc = await getDoc(docRef);
-			const existingNotes = existingDoc.exists() ? existingDoc.data().notes : '';
+			const existingNotes = existingDoc.exists() ? (existingDoc.data().notes || '') : '';
 			
 			const docData = {
 				problemId: problem.id,
@@ -51,7 +51,7 @@ export class FirebaseStorage extends Storage {
 			
 			// Get existing data to preserve notes
 			const existingDoc = await getDoc(docRef);
-			const existingNotes = existingDoc.exists() ? existingDoc.data().notes : '';
+			const existingNotes = existingDoc.exists() ? (existingDoc.data().notes || '') : '';
 			
 			const docData = {
 				problemId,
@@ -71,7 +71,7 @@ export class FirebaseStorage extends Storage {
 	async getProblem(problemId) {
 		const user = auth.currentUser;
 		if (!user) {
-			throw new Error('User is not logged in');
+			return null;
 		}
 
 		try {
