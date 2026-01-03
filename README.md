@@ -6,6 +6,7 @@ A spaced repetition web app for practicing LeetCode problems.
 - **Spaced Repetition**: Automated scheduling for problem reviews in a daily review queue.
 - **Integrated Notes**: Attach notes directly to problem cards to remember *why* a solution works.
 - **Progress Tracking**: Visual indicators for completed and pending daily reviews.
+- **Offline Support**: `localStorage` integration for non-authenticated usage.
 
 ## 🛠️ Tech Stack
 - **Frontend**: React, Vite
@@ -14,7 +15,6 @@ A spaced repetition web app for practicing LeetCode problems.
 - **Icons**: Lucide React
 
 ## 🚀 Roadmap
-- **Offline Support**: `localStorage` integration for non-authenticated usage.
 - **Smart Scheduling (SM-2)**: Implement the SuperMemo-2 algorithm for adaptive spacing.
 - **Streak Tracking**: I miss 2016 when every app had a streak.
 - **Custom Problems**: Allow users to track any LeetCode problem by pasting its URL.
