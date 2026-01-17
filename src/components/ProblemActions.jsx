@@ -16,7 +16,7 @@ export default function ProblemActions({
 					onClick={() => onReviewDate(0)}
 					className='flex-1 bg-red-50 hover:bg-red-100 text-red-700 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
-					Again
+					Unsolved
 					<span className='block text-xs opacity-70'>1d</span>
 				</button>
 				<button
@@ -30,7 +30,7 @@ export default function ProblemActions({
 					onClick={() => onReviewDate(7, true)}
 					className='flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
-					Good
+					Medium
 					<span className='block text-xs opacity-70'>7d</span>
 				</button>
 				<button
