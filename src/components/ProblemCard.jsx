@@ -78,7 +78,7 @@ export default function ProblemCard({ problem, user, onProblemAttempt }) {
 	}, [user, problem.id]);
 
 	return (
-		<div className='bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:border-gray-300 transition-colors'>
+		<div className='bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm hover:border-gray-300 dark:hover:border-gray-600 transition-colors'>
 			<ProblemHeader
 				problem={problem}
 				completed={completed}

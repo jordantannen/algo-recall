@@ -46,7 +46,7 @@ export default function ProblemNotes({ problemId, initialNotes = '', user }) {
 		<div>
 			<button
 				onClick={() => setIsNotesExpanded(!isNotesExpanded)}
-				className='flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors'
+				className='flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors'
 			>
 				{isNotesExpanded ? (
 					<NotebookPen size={14} />
@@ -60,7 +60,7 @@ export default function ProblemNotes({ problemId, initialNotes = '', user }) {
 					value={notes}
 					onChange={handleNotesChange}
 					placeholder='Write down your notes. Remember to include Big-O time complexities.'
-					className='w-full mt-2 p-2 border border-gray-200 rounded-md text-sm resize-y min-h-20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+					className='w-full mt-2 p-2 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-md text-sm resize-y min-h-20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
 				/>
 			)}
 		</div>

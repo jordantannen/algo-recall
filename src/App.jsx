@@ -18,10 +18,10 @@ export default function App() {
     }, []);
 
     return (
-        <div>
+        <div className='min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors'>
             <NavBar user={user} currentView={currentView} setCurrentView={setCurrentView} />
 
-            <div className='min-h-screen bg-gray-50 text-gray-900 p-8'>
+            <div className='text-gray-900 dark:text-gray-100 p-8'>
                 <div className='max-w-5xl mx-auto'>
                     {currentView === 'dashboard' && <ReadyQueue user={user} />}
                     {currentView === 'problemList' && NEETCODE_150.map((category) => (

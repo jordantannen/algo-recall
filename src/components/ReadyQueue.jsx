@@ -43,16 +43,16 @@ export default function ReadyQueue({ user }) {
 
     return (
         <div>
-            <h2 className='text-xl font-bold text-gray-900 mb-4'>
+            <h2 className='text-xl font-bold text-gray-900 dark:text-white mb-4'>
                 Problems Due Today
-                <span className='inline-flex items-center text-sm text-gray-600 bg-gray-200 px-2 py-0.5 ml-2 rounded-md'>
+                <span className='inline-flex items-center text-sm text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 ml-2 rounded-md'>
                     {dueProblems.length}
                 </span>
             </h2>
-            <div className='p-4 rounded-xl mb-8 border-2 border-dotted border-gray-300'>
+            <div className='p-4 rounded-xl mb-8 border-2 border-dotted border-gray-300 dark:border-gray-600'>
                 {dueProblems.length === 0 ? (
-                    <div className='flex flex-col items-center justify-center min-h-40 text-gray-500'>
-                        <CircleCheckBig size={50} className='text-green-600 mb-2' />
+                    <div className='flex flex-col items-center justify-center min-h-40 text-gray-500 dark:text-gray-400'>
+                        <CircleCheckBig size={50} className='text-green-600 dark:text-green-500 mb-2' />
                         <h1>All caught up - go touch grass!</h1>
                     </div>
                 ) : (

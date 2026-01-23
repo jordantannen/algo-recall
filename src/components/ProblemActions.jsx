@@ -10,32 +10,32 @@ export default function ProblemActions({
 		return (
 			<div
 				key='review-options'
-				className='flex gap-2 mt-4 pt-4 border-t border-gray-100'
+				className='flex gap-2 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700'
 			>
 				<button
 					onClick={() => onReviewDate(1, true)}
-					className='flex-1 bg-red-50 hover:bg-red-100 text-red-700 py-2 rounded text-sm transition-colors cursor-pointer'
+					className='flex-1 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-700 dark:text-red-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Unsolved
 					<span className='block text-xs opacity-70'>1d</span>
 				</button>
 				<button
 					onClick={() => onReviewDate(3, true)}
-					className='flex-1 bg-orange-50 hover:bg-orange-100 text-orange-700 py-2 rounded text-sm transition-colors cursor-pointer'
+					className='flex-1 bg-orange-50 dark:bg-orange-900/30 hover:bg-orange-100 dark:hover:bg-orange-900/50 text-orange-700 dark:text-orange-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Hard
 					<span className='block text-xs opacity-70'>3d</span>
 				</button>
 				<button
 					onClick={() => onReviewDate(7, true)}
-					className='flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 py-2 rounded text-sm transition-colors cursor-pointer'
+					className='flex-1 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 text-blue-700 dark:text-blue-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Medium
 					<span className='block text-xs opacity-70'>7d</span>
 				</button>
 				<button
 					onClick={() => onReviewDate(14, true)}
-					className='flex-1 bg-green-50 hover:bg-green-100 text-green-700 py-2 rounded text-sm transition-colors cursor-pointer'
+					className='flex-1 bg-green-50 dark:bg-green-900/30 hover:bg-green-100 dark:hover:bg-green-900/50 text-green-700 dark:text-green-400 py-2 rounded text-sm transition-colors cursor-pointer'
 				>
 					Easy
 					<span className='block text-xs opacity-70'>14d</span>
@@ -47,7 +47,7 @@ export default function ProblemActions({
 	return (
 		<div
 			key='action-buttons'
-			className='mt-4 pt-3 border-t border-gray-100 flex justify-end gap-2'
+			className='mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-end gap-2'
 		>
 			<button
 				onClick={onStartProblem}

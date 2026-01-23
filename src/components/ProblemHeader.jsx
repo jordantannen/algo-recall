@@ -3,13 +3,13 @@ import { ExternalLink } from 'lucide-react';
 function getDifficultyColor(difficulty) {
 	switch (difficulty.toLowerCase()) {
 		case 'easy':
-			return 'text-green-700 bg-green-50 border-green-200';
+			return 'text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800';
 		case 'medium':
-			return 'text-yellow-700 bg-yellow-50 border-yellow-200';
+			return 'text-yellow-700 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/30 border-yellow-200 dark:border-yellow-800';
 		case 'hard':
-			return 'text-red-700 bg-red-50 border-red-200';
+			return 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800';
 		default:
-			return 'text-gray-500';
+			return 'text-gray-500 dark:text-gray-400';
 	}
 }
 
@@ -21,18 +21,18 @@ export default function ProblemHeader({
 	return (
 		<div className='flex justify-between items-start'>
 			<div>
-				<span className='text-xs text-gray-500 uppercase tracking-wider font-semibold'>
+				<span className='text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold'>
 					{problem.category}
 				</span>
-				<h3 className='text-lg font-medium text-gray-900 flex items-center gap-2'>
+				<h3 className='text-lg font-medium text-gray-900 dark:text-white flex items-center gap-2'>
 					<a
 						href={problem.link}
 						target='_blank'
 						rel='noreferrer'
-						className='hover:underline flex items-center gap-1 hover:text-blue-600'
+						className='hover:underline flex items-center gap-1 hover:text-blue-600 dark:hover:text-blue-400'
 					>
 						{problem.title}
-						<ExternalLink size={14} className='text-gray-400' />
+						<ExternalLink size={14} className='text-gray-400 dark:text-gray-500' />
 					</a>
 				</h3>
 			</div>
@@ -46,7 +46,7 @@ export default function ProblemHeader({
 				</span>
 				<div className='mt-2 h-[20px]'>
 					{completed ? (
-						<span className='text-xs uppercase tracking-wider font-semibold text-green-600'>
+						<span className='text-xs uppercase tracking-wider font-semibold text-green-600 dark:text-green-400'>
 							Completed ✓
 						</span>
 					) : (
@@ -54,8 +54,8 @@ export default function ProblemHeader({
 							<span
 								className={`text-xs uppercase tracking-wider font-semibold ${
 									daysUntilReview <= 0
-										? 'text-red-600'
-										: 'text-gray-500'
+										? 'text-red-600 dark:text-red-400'
+										: 'text-gray-500 dark:text-gray-400'
 								}`}
 							>
 								Due:{' '}
